@@ -24,6 +24,11 @@
 		SELECT * FROM board where battachoname is not null
 	</select>
 	
+	<select id="searchBoard" parameterType="String" resultType="board">
+		<bind name="searchWord" value="'%'+word+'%'"></bind>
+		SELECT * FROM board where battachoname is not null and btitle like #{searchWord}
+	</select>
+	
 	<select id="selectByBno" parameterType="int" resultType="board">
 		SELECT bno, btitle, bcontent, bdate, mid, bhitcount, battachoname, battachsname, battachtype 
 		FROM board 

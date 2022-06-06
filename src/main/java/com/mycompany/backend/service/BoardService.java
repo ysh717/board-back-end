@@ -22,6 +22,10 @@ public class BoardService {
   public List<Board> getAllBoard() {
     return boardDao.selectAll();
   }
+  
+  public List<Board> getSearchBoard(String word){
+    return boardDao.searchBoard(word);
+  }
 	
 	public List<Board> getBoards(Pager pager) {
 		log.info("실행");

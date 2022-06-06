@@ -12,6 +12,7 @@ public interface BoardDao {
 	public List<Board> selectByPage(Pager pager);
 	public int count();
 	public List<Board> selectAll();
+	public List<Board> searchBoard(String word); 
 	public Board selectByBno(int bno);
 	public int insert(Board board);
 	public int deleteByBno(int bno);

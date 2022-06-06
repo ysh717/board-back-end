@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.backend.dto.Board;
-import com.mycompany.backend.dto.Pager;
 import com.mycompany.backend.service.BoardService;
 
 import lombok.extern.log4j.Log4j2;
@@ -38,9 +38,17 @@ public class BoardController {
   
   //목록뿌리기
   @GetMapping("/list")
-  public Map<String, Object> list(@RequestParam(defaultValue = "1") int pageNo){
+  public Map<String, Object> list(@RequestParam(defaultValue = "") String searchWord){
     log.info("실행");
-    List<Board> list = boardService.getAllBoard();
+    List<Board> list = null;
+    if(searchWord.equals("")) {
+      log.info(searchWord);
+      list = boardService.getAllBoard();
+    } else {
+      log.info(searchWord);
+      list = boardService.getSearchBoard(searchWord);
+    }
+    
     
     Map<String, Object> map = new HashMap<>();
     map.put("boards", list);
